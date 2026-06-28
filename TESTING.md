@@ -1,13 +1,13 @@
 # Running Elevator Tests
 
-This branch (`Elevator_baseline`) contains the starting implementation in `sources/` with hidden defects. The `tests/` folder is intentionally empty.
+This branch (`Elevator_golden`) contains the corrected implementation in `sources/`. The `tests/` folder is intentionally empty on this branch.
 
 Use the `Elevator_test` branch for the populated test suite.
 
 ## Layout
 
 ```
-sources/          RTL under test (baseline / buggy implementation)
+sources/          Corrected RTL implementation
 tests/            Empty on this branch
 pyproject.toml    Python dependencies (cocotb, pytest)
 SPEC.md           Design specification
@@ -18,3 +18,13 @@ SPEC.md           Design specification
 ```bash
 uv sync
 ```
+
+## Verify with the test suite
+
+Check out `Elevator_test`, replace its `sources/` files with the ones from this branch, then run:
+
+```bash
+uv run pytest tests/ -v
+```
+
+All tests should pass with the golden sources.

@@ -253,7 +253,7 @@ module elevator_controller #(
         logic [NUM_FLOORS-1:0] new_transit;
         logic                  skip_ground_floor;
 
-        skip_ground_floor      = dir_down_q && !idle_q;
+        skip_ground_floor      = 1'b0;
 
         state_d                = state_q;
         requests_d             = requests_q;
@@ -277,9 +277,6 @@ module elevator_controller #(
         estop_saved_state_d    = estop_saved_state_q;
 
         floor_has_request = requests_q[floor_q] | transit_q[floor_q];
-        if (state_q == ST_MOVING_DOWN) begin
-            floor_has_request = requests_q[floor_q];
-        end
         any_request       = |requests_q;
         can_move_up       = (floor_q < FLOOR_W'(TOP_FLOOR)) && !top_limit;
         can_move_down     = (floor_q > FLOOR_W'(0)) && !bottom_limit;

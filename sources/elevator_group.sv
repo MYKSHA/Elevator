@@ -113,7 +113,7 @@ module elevator_dispatch #(
 
         lift_id = LIFT_W'(lift_idx);
 
-        if (estop || (hold_beep && (call_f != lift_f))) begin
+        if (estop || hold_beep) begin
             return SCORE_UNAVAILABLE;
         end
 
