@@ -1,40 +1,20 @@
 # Running Elevator Tests
 
-This branch (`Elevator_test`) contains the full cocotb/pytest suite in `tests/` and the baseline implementation in `sources/`.
+This branch (`Elevator_baseline`) contains the starting implementation in `sources/` with hidden defects. The `tests/` folder is intentionally empty.
 
-**Expected result on this branch:** tests **fail** against the baseline RTL because the implementation contains hidden defects. Use the `Elevator_golden` branch for the corrected implementation.
+Use the `Elevator_test` branch for the populated test suite.
+
+## Layout
+
+```
+sources/          RTL under test (baseline / buggy implementation)
+tests/            Empty on this branch
+pyproject.toml    Python dependencies (cocotb, pytest)
+SPEC.md           Design specification
+```
 
 ## Setup
 
 ```bash
 uv sync
 ```
-
-## Run all tests
-
-```bash
-uv run pytest tests/ -v
-```
-
-## Run individual suites
-
-```bash
-uv run pytest tests/test_elevator_controller.py -v
-uv run pytest tests/test_elevator_group.py -v
-uv run pytest tests/test_bug_reveal.py -v
-```
-
-## Test files
-
-| File | Purpose |
-|------|---------|
-| `tests/test_elevator_controller.py` | Single-car regression (11 tests) |
-| `tests/test_elevator_group.py` | 6-lift group regression (6 tests) |
-| `tests/test_bug_reveal.py` | Targeted tests that expose hidden bugs (3 tests) |
-
-RTL is read from `sources/` by default. Override with `ELEVATOR_RTL_ROOT=sources` if needed.
-
-## Notes
-
-- Simulation artifacts: `sim_build/` (gitignored)
-- Pytest cache: `.pytest_cache/` (gitignored)
